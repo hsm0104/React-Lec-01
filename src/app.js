@@ -17,6 +17,8 @@
 //   return element;
 // }
 
+// import cereateDom
+import { createDOM, render } from "./react";
 // create vdom : simple obj 
 const vdom = {
   tag : "p",
@@ -33,17 +35,23 @@ const vdom = {
       children: [
         {
           tag : "li",
-          props: {},
+          props: {
+            style: "color: red"
+          },
           children: ["1 item"]
         },
         {
           tag : "li",
-          props: {},
+          props: {
+            style: "color: orange"
+          },
           children: ["2 item"]
         },
         {
           tag : "li",
-          props: {},
+          props: {
+            style: "color: coral"
+          },
           children: ["3 item"]
         }
       ]
@@ -51,6 +59,8 @@ const vdom = {
   ]
 }
 
-// show vdom contained in realDOM
-document.querySelector("#root")
-.appendChild(createDOM(vdom));
+// // show vdom contained in realDOM
+// document.querySelector("#root")
+// .appendChild(createDOM(vdom));
+
+render(vdom, document.querySelector("#root"));

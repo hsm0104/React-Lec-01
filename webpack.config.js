@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
     mode : 'development', //on Service / Developer mode
-    entry: './app.js', //which js file to start. input
+    entry: './src/app.js', //which js file to start. input
     output: {
         // 1. which directory to use. 2. what name
         path: path.resolve(__dirname, 'dist'), //using path built in node 
