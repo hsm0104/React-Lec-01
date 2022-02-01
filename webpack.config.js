@@ -10,6 +10,10 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'), //using path built in node 
         filename: "bundle.js"
     },
+    devServer:{
+        compress: true,
+        port: 999
+    },
 
     module: {
         rules: [
