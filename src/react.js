@@ -21,6 +21,19 @@ export const createDOM =(node) =>{
     return element;
   }
 
+//   add function createElement getting tag, props, children as params
+// make children as Array
+export const createElement = (tag, props, ...children) => {
+    // defulat param props ={} : can't be used : undefined = ok. null = obj(not ok)
+    props = props || {} //if null = can't render
+    return{
+        tag,
+        props,
+        children
+    }
+}
+
+
   export const render = (vdom, container) =>{
     container.appendChild(createDOM(vdom));
   }
