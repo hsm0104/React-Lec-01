@@ -59,7 +59,7 @@ export const createElement = (tag, props, ...children) => {
       }
     }
     }else{
-      return{
+      return{  //Virtual Dom's Input Data
         tag,
         props,
         children
@@ -68,7 +68,22 @@ export const createElement = (tag, props, ...children) => {
 }
 
 
-  export const render = (vdom, container) =>{
+// export function render(vdom, container){
+//     container.appendChild(createDOM(vdom));
+//   };
+  
+  // create render to compare
+export const render = (function () {
+  // to compare, define prev State
+  let prevDom = null;
+
+ return function (vdom, container){
+   // initial state. 
+  if (prevDom === null){
+    prevDom = vdom;
+  }
+
+// diff
     container.appendChild(createDOM(vdom));
   }
-  
+})();
