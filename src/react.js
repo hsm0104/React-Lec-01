@@ -1,4 +1,8 @@
 
+let hooks = [];
+// need index to order hookArray
+let currentComponent = 0;
+
 // create Component for class 
 export class Component {
   constructor(props){
@@ -37,6 +41,23 @@ export const createDOM =(node) =>{
     }
   }
 
+// define useState function
+function useState(initiValue){
+  // define position to have previous state
+  // replace position with currentComponent in this hook
+  let position = currentComponent -1;
+  // check if there is already initial hooks
+  // should not make changes inside => will reset
+  if(!hooks[position]){
+    hooks[position] = initiValue;
+  }
+  // defin modifier to make changes on value
+  const modifier = nextValue =>{
+    hooks[position] = nextValue;
+  }
+  return [hooks[position], modifier]
+}
+
 //   add function createElement getting tag, props, children as params
 // make children as Array
 export const createElement = (tag, props, ...children) => {
@@ -51,6 +72,11 @@ export const createElement = (tag, props, ...children) => {
         const instance = new tag(makeProp(props, children));
         return instance.render();
       }else{
+
+        // define initial hook where return Function
+        hooks[currentComponent] = null;
+        currentComponent ++;
+
       // check if there is children && children is Array?
       if(children.length > 0){
         return tag(makeProp(props, children))
