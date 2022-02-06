@@ -82,7 +82,7 @@ function Item (props){
   return <li style={`color: ${props.color}`}>{props.children}</li>
 }
 
-const vdom =  // vdom 3 : more like JSX. But not React yet
+const App = () =>// vdom 3 : more like JSX. But not React yet
 <p>
   {/* <h1>Making Simple React</h1> */}
   <Title label="making React">REACTTTTTT</Title>
@@ -100,4 +100,4 @@ const vdom =  // vdom 3 : more like JSX. But not React yet
 // document.querySelector("#root")
 // .appendChild(createDOM(vdom));
 
-render(vdom, document.querySelector("#root"));
+render(<App />, document.querySelector("#root"));
