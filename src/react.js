@@ -26,11 +26,25 @@ export const createDOM =(node) =>{
 export const createElement = (tag, props, ...children) => {
     // defulat param props ={} : can't be used : undefined = ok. null = obj(not ok)
     props = props || {} //if null = can't render
-    return{
+
+    // check if it is function or string (JSX ? function : string tag)
+    if(typeof tag === 'function'){
+      // check if there is children && children is Array?
+      if(children.length > 0){
+        return tag({
+          ...props,
+          children: children.length === 1 ? children[0] : children
+        })
+      }else{
+        return tag(props);
+      }
+    }else{
+      return{
         tag,
         props,
         children
     }
+  }
 }
 
 
