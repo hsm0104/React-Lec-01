@@ -1,3 +1,12 @@
+
+// create Component for class 
+export class Component {
+  constructor(props){
+    this.props = props
+  }
+}
+
+
 // create function to call vdom in real Dom
 export const createDOM =(node) =>{
   
@@ -21,6 +30,13 @@ export const createDOM =(node) =>{
     return element;
   }
 
+  function makeProp (props, children){
+    return {
+      ...props,
+      children: children.length === 1 ? children[0] : children
+    }
+  }
+
 //   add function createElement getting tag, props, children as params
 // make children as Array
 export const createElement = (tag, props, ...children) => {
@@ -29,15 +45,19 @@ export const createElement = (tag, props, ...children) => {
 
     // check if it is function or string (JSX ? function : string tag)
     if(typeof tag === 'function'){
+      // typeof can't distinguish function & class -> use 'prototype'
+      // instanceof Component = class component
+      if(tag.prototype instanceof Component){
+        const instance = new tag(makeProp(props, children));
+        return instance.render();
+      }else{
       // check if there is children && children is Array?
       if(children.length > 0){
-        return tag({
-          ...props,
-          children: children.length === 1 ? children[0] : children
-        })
+        return tag(makeProp(props, children))
       }else{
         return tag(props);
       }
+    }
     }else{
       return{
         tag,

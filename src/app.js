@@ -70,13 +70,21 @@
 
 // add to make React
 /* @jsx createElement */
-import { createDOM, createElement, render } from "./react"; //createElement should be there for dist file
+import { createDOM, createElement, render, Component } from "./react"; //createElement should be there for dist file
+
+// creating Title into Class component
+class Title extends Component {
+  // React must have render
+  render(){
+    return <h1>{this.props.children}</h1>
+  }
+}
 
 // create function Title (seperate h1 title)
-function Title (props) {
-  // return <h1>Making Simple React</h1>
-  return <h1>{props.children}</h1>
-}
+// function Title (props) {
+//   // return <h1>Making Simple React</h1>
+//   return <h1>{props.children}</h1>
+// }
 
 function Item (props){
   return <li style={`color: ${props.color}`}>{props.children}</li>
@@ -85,7 +93,7 @@ function Item (props){
 const App = () =>// vdom 3 : more like JSX. But not React yet
 <p>
   {/* <h1>Making Simple React</h1> */}
-  <Title label="making React">REACTTTTTT</Title>
+  <Title label="making React">REACTTTTTT Class</Title>
   <ul>
     {/* <li style= "color: red">item 1</li>
     <li style= "color: orange">item 2</li>
